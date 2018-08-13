@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <div id="react"></div>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="script.js"></script>
+    <script type="text/babel">
+        class App extends React.Component {
+          constructor(props){
+              super(props);
+              this.state = {
+                  votes : [<Counter name={"React"} value={0}/>,<Counter name={"Vue"} value={0}/>,<Counter name={"Angular"} value={0}/>,<Counter name={"Ember"} value={0}/>]
+              }
+          }
+          render(){
+              return (
+                  <div>
+                    <h1>Vote for your favorite</h1>
+                    {this.state.votes}
+                  </div>
+              )
+          }
+        }
+        class Counter extends React.Component {
+          constructor(props){
+              super(props);
+              this.state = {
+                  name: props.name,
+                  value: props.value
+              }
+          }
+          render(){
+              return (
+                  <div >
+                    <h1>{this.state.name} {this.state.value}</h1>
+                    <button onClick={ () => this.setState({ value: this.state.value+1 }) }>Vote</button>
+                  </div>
+              )
+          }
+        }
+        ReactDOM.render(
+          <App/>, document.getElementById('react')
+        )
+    </script>
+</body>
+
+</html>

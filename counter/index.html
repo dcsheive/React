@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>React Demo</title>
+</head>
+
+<body>
+    <div id="react"></div>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="script.js"></script>
+    <script type="text/babel">
+        class App extends React.Component {
+          constructor(props){
+              super(props);
+              this.state = {
+                  counters: [<Counter/>]
+              }
+          }
+          addCounter(){
+              let temp = this.state.counters
+              temp.push(<Counter/>)
+              this.setState({counters: temp})
+          }
+          render(){
+              return (
+                  <div>
+                      <button
+                          onClick={ () => this.addCounter() } >
+                          Click to add a counter!
+                      </button>
+                      {this.state.counters}
+                  </div>
+              )
+          }
+        }
+        class Counter extends React.Component {
+          constructor(props){
+              super(props);
+              this.state = {
+                  value: 0
+              }
+          }
+          render(){
+              return (
+                  <div >
+                    <h1>{this.state.value}</h1>
+                    <button onClick={ () => this.setState({ value: this.state.value+1 }) } >
+                        Increment
+                    </button>
+                    <button onClick={ () => this.setState({ value: this.state.value-1 }) } >
+                        Decrement
+                    </button>
+                  </div>
+              )
+          }
+        }
+        ReactDOM.render(
+          <App/>, document.getElementById('react')
+        )
+    </script>
+</body>
+
+</html>
